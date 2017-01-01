@@ -1,0 +1,20 @@
+{
+  "name": "koa-app",
+  "version": "0.0.1",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --harmony-async-await app.js"
+  },
+  "author": "",
+  "license": "",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "koa": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "pg": "^6.1",
+    "pg-pool": "^1.5"
+  },
+  "devDependencies": {
+  }
+}
