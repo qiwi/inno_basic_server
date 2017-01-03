@@ -1,19 +1,41 @@
 /**
  * Created by g.konnov on 24.12.2016.
  */
+const Controller = require('../../innotrio/koa/controller');
+//Модель по работе с данными пользователей
 const userModel = new (require('../models/users'));
 
-class Users {
+//Валидатор, который подключаем только если используется напрямую.
+const Validator = require('../../innotrio/validation/validator');
+
+/**
+ * Контроллер, куда приходят все запросы, описанные в routes
+ */
+class Users extends Controller {
     async getItems(ctx, next) {
         ctx.body = await userModel.getItems();
     }
 
-    /** getItem (request, response) {
-    const idUser = request.param('id');
-  console.log(idUser);
-    let user = yield UsersModel.getItem(idUser);
-    response.send(user);
-  }*/
+    async getItem(ctx, next) {
+        //Пример работы с валидатором напрямую
+        let id = Validator.isInt(ctx.request.query.id);
+
+        ctx.body = await userModel.getItem(id);
+    }
+
+    async updateItem(ctx, next) {
+        //Если получается несколько полей, то лучше использовать validateBody или validateQuery,
+        //так не потребуется много раз прописывать ctx.request.query.
+        //Также в ошибке валидации вернется поле, которое не прошло валидацию.
+        let data = this.validateBody(ctx, (validator) => {
+            return {
+                id: validator.isInt('id'),
+                name: validator.escape('name')
+            };
+        });
+
+        ctx.body = await userModel.updateItem(data.id,data.name);
+    }
 }
 
 module.exports = Users;

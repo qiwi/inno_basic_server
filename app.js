@@ -1,12 +1,14 @@
 const config = require('./config');
 
 const Koa = require('koa');
-const app = new Koa();
+const bodyParser = require('koa-bodyparser');
 const router = require('./app/routes');
 
 const Pool = require('pg-pool');
 global.pg = new Pool(config.db);
 
+const app = new Koa();
+app.use(bodyParser());
 app.use(router.routes());
 app.use(router.allowedMethods());
 

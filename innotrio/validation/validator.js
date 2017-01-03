@@ -2,8 +2,20 @@
  * Created by g.konnov on 31.12.2016.
  */
 
-module.exports = class Validator {
+var validator = require('validator');
 
+module.exports = class Validator {
+    static isInt(value) {
+        if (validator.isInt(value)) {
+            return value;
+        }else{
+            throw 'VALIDATION_NOT_INT';
+        }
+    }
+
+    static escape(value) {
+        return validator.escape(value);
+    }
 };
 
 
@@ -43,9 +55,6 @@ module.exports = class Validator {
  return results
  }
 
- func Escape(item string) (string) {
- return html.EscapeString(item)
- }
 
  func checkError(err error, errCode string) {
  if err != nil {

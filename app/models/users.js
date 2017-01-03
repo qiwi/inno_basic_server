@@ -2,15 +2,19 @@
  * Created by g.konnov on 25.12.2016.
  */
 
-class Users {
+module.exports = class Users {
     async getItems() {
         let items = await pg.query('SELECT id_user, user_name FROM obj_user');
-        return items.rows;//[{name:'a',id:2}];
+        return items.rows;
     }
 
-    /** getItem (idUser) {
-    return yield Database.select('*').from('obj_user').where('id_user', idUser)
-  }*/
-}
+    async getItem(idUser) {
+        let items = await pg.query('SELECT id_user, user_name FROM obj_user WHERE id_user = $1',[idUser]);
+        return items.rows;
+    }
 
-module.exports = Users;
+    async updateItem(idUser, name) {
+        let items = await pg.query('UPDATE obj_user SET user_name = $2 WHERE id_user = $1 RETURNING id_user, user_name',[idUser,name]);
+        return items.rows;
+    }
+};

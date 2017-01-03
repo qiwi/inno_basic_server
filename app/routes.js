@@ -4,29 +4,25 @@
 
 const Router = require('koa-router'),
     router = new Router(),
-    users = new (require('./controllers/users'));
+    users = new ((require('./controllers/users')))();
 
-router.get('/api/users', users.getItems);
+/** Функция сохранения контекста для класса контроллера. Иначе в контроллере контект будет от koa */
+var context = (classItem, classMethod) => {
+    return async(ctx, next) => await classMethod.call(classItem, ctx, next);
+};
+
+router.get('/api/users', context(users, users.getItems))
+    .get('/api/user', context(users, users.getItem))
+    .patch('/api/user', context(users, users.updateItem));
 
 module.exports = router;
 
-//module.exports = class Application extends Emitter {
+
 /*
- module.exports = function routes(app) {
- "use strict";
-
- const Router = require('koa-router'),
- router = new Router(),
- indexController = require('../controllers/indexController');
-
  router
  .get('/users',        indexController.list)
- .get('/users/:id',    indexController.getId)
+ .get('/user/',    indexController.getId)
  .post('/users/',      indexController.createItem)
- .put('/users/:id',    indexController.updateItem)
- .delete('/users/:id', indexController.removeItem);
-
- app.use(router.routes());
- app.use(router.allowedMethods());
-
+ .put('/users/',    indexController.updateItem)
+ .delete('/users/', indexController.removeItem);
  };*/
