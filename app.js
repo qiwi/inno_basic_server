@@ -4,8 +4,11 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const router = require('./app/routes');
 
-const Pool = require('pg-pool');
-global.pg = new Pool(config.db);
+const Pool = require('pg-pool'),
+    pool = new Pool(config.db);
+
+const Pg = require('./innotrio/db/pg');
+global.pg = new Pg(pool);
 
 const app = new Koa();
 app.use(bodyParser());
