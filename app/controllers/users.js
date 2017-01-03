@@ -1,9 +1,10 @@
+//@flow
 /**
  * Created by g.konnov on 24.12.2016.
  */
 const Controller = require('../../innotrio/koa/controller');
 //Модель по работе с данными пользователей
-const userModel = new (require('../models/users'));
+const userModel:UsersModel = new (require('../models/users'));
 
 //Валидатор, который подключаем только если используется напрямую.
 const Validator = require('../../innotrio/validation/validator');
@@ -11,7 +12,7 @@ const Validator = require('../../innotrio/validation/validator');
 /**
  * Контроллер, куда приходят все запросы, описанные в routes
  */
-class Users extends Controller {
+module.exports = class UsersCtrl extends Controller {
     async getItems(ctx, next) {
         ctx.body = await userModel.getItems();
     }
@@ -27,7 +28,7 @@ class Users extends Controller {
         //Если получается несколько полей, то лучше использовать validateBody или validateQuery,
         //так не потребуется много раз прописывать ctx.request.query.
         //Также в ошибке валидации вернется поле, которое не прошло валидацию.
-        let data = this.validateBody(ctx, (validator) => {
+        let data = this.validateBody(ctx, (validator:ItemValidator) => {
             return {
                 id: validator.isInt('id'),
                 name: validator.escape('name')
@@ -38,4 +39,3 @@ class Users extends Controller {
     }
 }
 
-module.exports = Users;

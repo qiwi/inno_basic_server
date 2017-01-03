@@ -1,10 +1,11 @@
+//@flow
 /**
  * Created by g.konnov on 31.12.2016.
  */
 
 const Router = require('koa-router'),
     router = new Router(),
-    users = new ((require('./controllers/users')))();
+    users:UsersCtrl = new ((require('./controllers/users')))();
 
 /** Функция сохранения контекста для класса контроллера. Иначе в контроллере контект будет от koa */
 var context = (classItem, classMethod) => {
