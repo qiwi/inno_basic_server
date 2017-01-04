@@ -14,10 +14,10 @@ var context = (classItem, classMethod) => {
 };
 
 router
-    .post(config.apiPath+'user', context(users, users.addItem))
-    .get(config.apiPath+'users', context(users, users.getItems))
-    .get(config.apiPath+'user', context(users, users.getItem))
-    .patch(config.apiPath+'user', context(users, users.updateItem))
-    .delete(config.apiPath+'user', context(users, users.deleteItem));
+    .post(config.url+'user', context(users, users.addItem))
+    .get(config.url+'users', context(users, users.getItems))
+    .get(config.url+'user', context(users, users.getItem))
+    .patch(config.url+'user', context(users, users.updateItem))
+    .delete(config.url+'user', context(users, users.deleteItem));
 
 module.exports = router;

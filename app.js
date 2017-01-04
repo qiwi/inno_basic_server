@@ -24,15 +24,8 @@ process.on('uncaughtException', (err) => console.log('PROCESS_EXCEPTION', err.st
 
 app.listen(config.port, () => console.log('Server listening on port ' + config.port));
 
-
-/*GLOBAL.configs = configs;
-
-
- process.on('uncaughtException', function (err) {
- console.log(err.stack);
- console.log(err);
- });
-
+//непереведенные старые части
+/*
  //CORS middleware
  var allowCrossDomain = function (req, res, next) {
  res.header('Access-Control-Allow-Origin', '*');
