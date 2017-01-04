@@ -9,11 +9,14 @@ global.pg = new Pg(pool);
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const router = require('./app/routes');
+const errorMiddleware = require('./innotrio/koa/error_middleware');
 
 const app = new Koa();
 app.use(bodyParser());
+app.use(errorMiddleware);
 app.use(router.routes());
 app.use(router.allowedMethods());
+
 
 app.on('error', (err, ctx) => console.log('REQUEST_ERROR', err, ctx));
 process.on('uncaughtException', (err) => console.log('PROCESS_EXCEPTION', err.stack));

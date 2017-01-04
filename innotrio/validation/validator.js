@@ -2,7 +2,8 @@
  * Created by g.konnov on 31.12.2016.
  */
 
-var validator = require('validator');
+const validator = require('validator'),
+    ResultError = require('../error');
 
 module.exports = class Validator {
     /**
@@ -12,7 +13,7 @@ module.exports = class Validator {
         if (!isNaN(value) && validator.isInt(value)) {
             return value;
         } else {
-            throw 'VALIDATION_NOT_INT';
+            throw new ResultError('VALIDATION_NOT_INT', 400, value);
         }
     }
 
@@ -33,7 +34,7 @@ module.exports = class Validator {
         if (value.length > 0) {
             return Validator.escape(value);
         } else {
-            throw 'VALIDATION_NO_STRING';
+            throw new ResultError('VALIDATION_NO_STRING', 400, value);
         }
     }
 
@@ -46,11 +47,9 @@ module.exports = class Validator {
         if (validator.isEmail(email)) {
             return email;
         } else {
-            throw 'VALIDATION_NOT_EMAIL';
+            throw new ResultError('VALIDATION_NOT_EMAIL', 400, value);
         }
     }
-
-
 
 
 };

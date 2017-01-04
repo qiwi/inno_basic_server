@@ -3,7 +3,7 @@ const PgModel = require('../../innotrio/db/pg_model');
 const Hash = require('../../innotrio/hash');
 
 module.exports = class UsersModel extends PgModel {
-    async addItem(email:string, name: string, password: string) {
+    async addItem(email: string, name: string, password: string) {
         let passHash: string = Hash.getSha256(password);
         return await this.pg.getRow('INSERT INTO koa.obj_user (user_email, user_name, user_password) VALUES ($1, $2, $3) RETURNING id_user', [email, name, passHash]);
     }

@@ -23,5 +23,6 @@
 Создать базу koa и прописать в настройках config.js
 
 ### Полезное
-Библиотека валидатора: https://github.com/chriso/validator.js
+* Библиотека валидатора: https://github.com/chriso/validator.js
+* Используе pg-pool для бд: https://github.com/brianc/node-pg-pool
 

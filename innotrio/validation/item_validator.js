@@ -7,6 +7,7 @@ const Validator = require('./validator');
 /**
  * Валидатор, облегчающий массовую валидацию полей в контроллере
  */
+//TODO добавить здесь обертку для возврата поля, которое не прошло валидацию
 module.exports = class ItemValidator {
     constructor(item) {
         this.item = item;
