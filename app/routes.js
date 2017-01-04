@@ -5,6 +5,7 @@
 
 const Router = require('koa-router'),
     router = new Router(),
+    config = require('../config'),
     users:UsersCtrl = new ((require('./controllers/users')))();
 
 /** Функция сохранения контекста для класса контроллера. Иначе в контроллере контект будет от koa */
@@ -13,20 +14,10 @@ var context = (classItem, classMethod) => {
 };
 
 router
-    .post('/api/user', context(users, users.addItem))
-    .get('/api/users', context(users, users.getItems))
-    .get('/api/user', context(users, users.getItem))
-    .patch('/api/user', context(users, users.updateItem))
-    .delete('/api/user', context(users, users.deleteItem));
+    .post(config.apiPath+'user', context(users, users.addItem))
+    .get(config.apiPath+'users', context(users, users.getItems))
+    .get(config.apiPath+'user', context(users, users.getItem))
+    .patch(config.apiPath+'user', context(users, users.updateItem))
+    .delete(config.apiPath+'user', context(users, users.deleteItem));
 
 module.exports = router;
-
-
-/*
- router
- .get('/users',        indexController.list)
- .get('/user/',    indexController.getId)
- .post('/users/',      indexController.createItem)
- .put('/users/',    indexController.updateItem)
- .delete('/users/', indexController.removeItem);
- };*/

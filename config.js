@@ -4,6 +4,7 @@ require('flow-remove-types/register');
 
 module.exports = {
     port: 2211,
+    apiPath: '/api/',
     db: {
         host: '127.0.0.1',
         port: 5432,
