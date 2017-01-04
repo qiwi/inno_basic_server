@@ -12,11 +12,32 @@ module.exports = class ItemValidator {
         this.item = item;
     }
 
+    /**
+     * Проверяет, что значение - целое число. undefined не принимает.
+     */
     isInt(field) {
         return Validator.isInt(this.item[field]);
     }
 
+    /**
+     * Эскейпит строку. Не проверяет наличие.
+     */
     escape(field) {
         return Validator.escape(this.item[field]);
     }
+
+    /**
+     * Проверяет, что значение - строка, эскейпит, тримит. undefined вызовет ошибку.
+     */
+    isString(field) {
+        return Validator.isString(this.item[field]);
+    }
+
+    /**
+     * Проверяет, что передан email + lowercase+trim+escape
+     */
+    isEmail(field) {
+        return Validator.isEmail(this.item[field]);
+    }
+
 };

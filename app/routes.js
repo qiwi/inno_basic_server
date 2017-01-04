@@ -12,9 +12,12 @@ var context = (classItem, classMethod) => {
     return async(ctx, next) => await classMethod.call(classItem, ctx, next);
 };
 
-router.get('/api/users', context(users, users.getItems))
+router
+    .post('/api/user', context(users, users.addItem))
+    .get('/api/users', context(users, users.getItems))
     .get('/api/user', context(users, users.getItem))
-    .patch('/api/user', context(users, users.updateItem));
+    .patch('/api/user', context(users, users.updateItem))
+    .delete('/api/user', context(users, users.deleteItem));
 
 module.exports = router;
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<DBMODEL Version="1.9" TYPE="PostgreSQL">
+
+<MODELSETTINGS MDDVERSION="1.11.3 (build 1070)" ModelProject="" ModelName="47rest" ModelCompany="" ModelAuthor="" ModelCopyright="" ModelVersion="" ModelVersionAI="0" ModelSaveScriptsWithVersion="0" ModelCreated="2016-10-12 16:35:56" ModelUpdated="2017-01-04 20:37:35" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object GenSettings1: TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  NotValidConstraints = False\n  ConcurrentlyIndexes = False\n  ISQL = False\n  ExecuteAfterGeneration = True\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoDrop, viewgoCreateRule]\n  SPOptions = [spgoCreate, spgoDrop]\n  TableOptions = [tblgoCreate, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger, tblgoCreateCHECK, tblgoFieldDefault]\n  OwnerOptions = []\n  ACLOptions = []\n  ModifyOptions = [mgoKeepTbls, mgoBackupTbls, mgoTraceRenaming]\n  RoleCreate = False\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" DisplaySettings="object DisplaySettings1: TDisplaySettings\n  ObjectsDisplay = [edoColumns, edoInhColumns, edoIndices, edoConstraints, edoTriggers, edoRules, edoColTypes, edoColIndexUsage, edoColNull, edoFKs, edoComments, spdoParameters, spdoResult, spdoParamTypes, spdoParamKind, vdoAttributes, vdoTargets, vdoRules]\n  Color = clWhite\n  ShowIcons = True\n  SnapGrid = True\n  DisplaySnap = True\n  SnapSize = 10\n  ShowPages = True\n  EntityFillColor = clWhite\n  EntityLineColor = clNavy\n  SPFillColor = 13499135\n  SPLineColor = clNavy\n  ViewFillColor = 3329434\n  ViewLineColor = clNavy\n  RefNotation = 0\n  RefColor = clNavy\n  RefLabelColor = clWhite\n  MinimapShapesStyle = mmssFillAndBorder\n  MinimapVisibleAreaStyle = mmvasBitmapShading\n  MinimapBackColor = clWhite\nend\n" DefaultDelete="1" DefaultUpdate="1" DefaultDataType="23" DefaultSchemaID="0" NamePatterns="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" PKColumnsFirst="0" HPageCount="5" VPageCount="5" />
+
+<DATABASE Name="Database_1" CharacterSet="" Collate="" CType="" Tablespace="" Owner="" Template="" Comments="" Description="" Annotation="" BeginScript="" EndScript="" Generate="0" />
+
+<STAMPS>
+</STAMPS>
+
+<ROLES>
+<ROLE ID="10" Name="postgres" Roles="" Admins="" Generate="0" Comments="" Password="" CreateDB="1" SuperUser="1" CreateRole="1" Inherit="1" UpdateCatalogs="1" Login="1" PassEncrypted="0" Valid="2958465.99999"></ROLE>
+</ROLES>
+
+<SCHEMAS>
+<SCHEMA ID="0" Name="public" Owner="" Generate="0" Comments="" System="1" ACL=""></SCHEMA>
+<SCHEMA ID="2201" Name="koa" Owner="" Generate="1" Comments="" System="0" ACL=""></SCHEMA>
+</SCHEMAS>
+
+<SEQUENCES>
+</SEQUENCES>
+
+<DOMAINS>
+</DOMAINS>
+
+<COMPOSITES>
+<COMPOSITE ID="10006" Name="obj_user" SchemaName="koa" OwnerName="" Comments="" MasterTableOID="25171">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+<COMPOSITE ID="10012" Name="ref_occupation" SchemaName="koa" OwnerName="" Comments="" MasterTableOID="0">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+<COMPOSITE ID="10020" Name="ref_match_staus" SchemaName="koa" OwnerName="" Comments="" MasterTableOID="0">
+	<COLUMNS>
+	</COLUMNS>
+</COMPOSITE>
+</COMPOSITES>
+
+<SCALARS>
+</SCALARS>
+
+<ENUMS>
+</ENUMS>
+
+<TABLESPACES>
+</TABLESPACES>
+
+<METADATA>
+<ENTITIES>
+<ENTITY ID="25171" Name="obj_user" SchemaOID="2201" SchemaName="koa" OwnerID="10" OwnerName="postgres" TablespaceID="0" XPos="100" YPos="250" Temporary="0" Unlogged="0" OnCommit="" Inherits="" FillColor="16777215" LineColor="8388608" CharacterSet="" Collate="" Comments="\041F\043E\043B\044C\0437\043E\0432\0430\0442\0435\043B\0438" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" ACL="" StorageParams="OIDS=False\n" >
+	<COLUMNS>
+		<COLUMN ID="220516" Name="id_user" Pos="0" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="1" AutoInc="1" Collation="" PrimaryKey="1" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="220564" Name="user_email" Pos="1" Datatype="1043" Type="varchar" Width="0" Prec="0" NotNull="1" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="220517" Name="user_name" Pos="2" Datatype="1043" Type="varchar" Width="0" Prec="0" NotNull="1" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+		<COLUMN ID="220552" Name="user_password" Pos="3" Datatype="1043" Type="varchar" Width="0" Prec="0" NotNull="1" AutoInc="0" Collation="" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments=""></COLUMN>
+	</COLUMNS>
+	<CONSTRAINTS>
+		<CONSTRAINT ID="25179" Name="obj_user_pkey" Kind="2" Expression="" ReferenceIndex="25902" FillFactor="" Comments="" TablespaceID="0" Deferrable="0" Method="0">
+			<CONSTRAINTCOLUMNS COMMATEXT="220516"></CONSTRAINTCOLUMNS>
+			<CONSTRAINTOPERATORS COMMATEXT=""></CONSTRAINTOPERATORS>
+		</CONSTRAINT>
+	</CONSTRAINTS>
+	<INDEXES>
+		<INDEX ID="25901" Name="idx_user_email" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="0" StorageParams="" Comments="">
+			<INDEXCOLUMNS COMMATEXT="user_email"></INDEXCOLUMNS>
+			<INDEXSORTS COMMATEXT="\A\A"></INDEXSORTS>
+			<INDEXNULLS COMMATEXT="\A\A"></INDEXNULLS>
+		</INDEX>
+	</INDEXES>
+</ENTITY>
+
+</ENTITIES>
+
+<REFERENCES>
+</REFERENCES>
+
+<NOTES>
+</NOTES>
+
+<STOREDPROCES>
+</STOREDPROCES>
+
+<VIEWS>
+</VIEWS>
+
+</METADATA>
+</DBMODEL>

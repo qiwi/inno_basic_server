@@ -5,19 +5,55 @@
 var validator = require('validator');
 
 module.exports = class Validator {
+    /**
+     * Проверяет, что значение - целое число. undefined не принимает.
+     */
     static isInt(value) {
-        if (validator.isInt(value)) {
+        if (!isNaN(value) && validator.isInt(value)) {
             return value;
-        }else{
+        } else {
             throw 'VALIDATION_NOT_INT';
         }
     }
 
+    /**
+     * Эскейпит строку. Не проверяет наличие.
+     */
     static escape(value) {
-        return validator.escape(value);
+        return validator.escape(value || '');
     }
-};
 
+    /**
+     * Проверяет, что значение - строка, эскейпит, тримит. undefined вызовет ошибку.
+     */
+    static isString(value) {
+        value = value || '';
+        value = value.trim();
+
+        if (value.length > 0) {
+            return Validator.escape(value);
+        } else {
+            throw 'VALIDATION_NO_STRING';
+        }
+    }
+
+    /**
+     * Проверяет, что передан email + lowercase+trim+escape
+     */
+    static isEmail(value) {
+        let email = Validator.isString(value).toLowerCase();
+
+        if (validator.isEmail(email)) {
+            return email;
+        } else {
+            throw 'VALIDATION_NOT_EMAIL';
+        }
+    }
+
+
+
+
+};
 
 
 /*
