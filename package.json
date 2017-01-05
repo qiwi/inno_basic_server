@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "node --harmony-async-await app.js"
+    "start": "node --harmony-async-await build/app.js",
+    "build": "babel . -d build --ignore node_modules"
   },
   "author": "",
   "license": "",
@@ -18,7 +19,11 @@
     "pg-pool": "^1.5"
   },
   "devDependencies": {
-    "flow-bin": "^0.37.4",
-    "flow-remove-types": "^1.1.2"
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "eslint": "^3.12.2",
+    "eslint-plugin-flowtype": "^2.29.2",
+    "flow-bin": "^0.37.4"
   }
 }

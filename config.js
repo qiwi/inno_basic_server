@@ -1,6 +1,4 @@
 process.env.NODE_ENV = 'development';
-//ТОЛЬКО для разработки. УБРАТЬ в production
-require('flow-remove-types/register');
 
 module.exports = {
     port: 2211,
