@@ -1,12 +1,7 @@
-//@flow
-/**
- * Created by g.konnov on 04.01.2017.
- */
 module.exports = class ResultError {
     code: string;
     status: number;
-    //скрытый объект, который отобразится в логах
-    logObject:any;
+    logObject: any;
 
     constructor(code: string, httpStatus: string|void, internalLogObject:any|void) {
         this.code = 'ERROR_'+code;
