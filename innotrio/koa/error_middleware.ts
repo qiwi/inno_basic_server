@@ -1,26 +1,19 @@
-/**
- * Created by g.konnov on 01.01.2017.
- */
+import {ResultError} from '../error';
+import {Context} from 'koa';
 
-let ResultError = require('../error');
-
-module.exports = async (ctx, next) => {
+export async function errorMiddleware(ctx: Context, next: Function): Promise<any> | never {
     try {
         await next();
     } catch (err) {
-        let error;
-        if (!ResultError.isError(err)){
-            error = new ResultError('INTERNAL',500,err);
-        }else{
-            error = err;
-        }
+        const error = ResultError.isError(err) ? err : new ResultError('INTERNAL', 500, err);
+        console.log(err);
 
-        ResultError.logError(error.code,error.status,error.logObject);
-
-        ctx.status = error.status;
+        ResultError.logError(error.code, error.status, error.logObject);
+        ctx.status = parseInt(error.status);
         ctx.body = {
-            status:'error',
-            code: error.code
+            status: error.status,
+            code: error.code,
+            data: error.logObject
         };
     }
 }

@@ -1,22 +1,16 @@
-/**
- * Created by g.konnov on 02.01.2017.
- */
+import {Context} from 'koa';
+import {ItemValidator} from '../validation/item_validator';
 
-var ItemValidator = require('./../validation/item_validator');
-
-class Controller {
-
-    validateQuery(ctx, cb) {
+export class Controller {
+    validateQuery(ctx: Context, cb: (ItemValidator) => any): any {
         return cb(this._validate(ctx.request.query));
     };
 
-    validateBody(ctx, cb) {
+    validateBody(ctx: Context, cb: (ItemValidator) => any): any {
         return cb(this._validate(ctx.request.body));
     };
 
-    _validate(item) {
+    _validate(item): ItemValidator {
         return new ItemValidator(item);
     };
 }
-
-module.exports = Controller;

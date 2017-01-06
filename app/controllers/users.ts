@@ -1,24 +1,20 @@
-//@flow
-/**
- * Created by g.konnov on 24.12.2016.
- */
-const Controller = require('../../innotrio/koa/controller');
-//Модель по работе с данными пользователей
-const UsersModel = require('../models/users');
-const userModel: UsersModel = new UsersModel(pg);
-
-//Валидатор, который подключаем только если используется напрямую.
-const Validator = require('../../innotrio/validation/validator');
+import {Controller} from '../../innotrio/koa/controller';
+import {UsersModel} from '../models/users';
+// Валидатор, который подключаем только если используется напрямую.
+import {Validator} from '../../innotrio/validation/validator';
+import {Context} from 'koa';
+import {IValidator} from "../../innotrio/validation/interfaces";
+const userModel = new UsersModel(global.pg);
 
 /**
  * Контроллер, куда приходят все запросы, описанные в routes
  */
-module.exports = class UsersCtrl extends Controller {
-    async addItem(ctx, next) {
+export class Users extends Controller {
+    async addItem(ctx: Context): Promise<void> {
         //Если получается несколько полей, то лучше использовать validateBody или validateQuery,
         //так не потребуется много раз прописывать ctx.request.query.
         //Также в ошибке валидации вернется поле, которое не прошло валидацию.
-        let data = this.validateBody(ctx, (validator: ItemValidator) => {
+        const data = this.validateBody(ctx, (validator: IValidator) => {
             return {
                 email: validator.isEmail('email'),
                 name: validator.escape('name'),
@@ -29,20 +25,20 @@ module.exports = class UsersCtrl extends Controller {
         ctx.body = await userModel.addItem(data.email, data.name, data.password);
     }
 
-    async getItems(ctx, next) {
+    async getItems(ctx: Context): Promise<void> {
         ctx.body = await userModel.getItems();
     }
 
-    async getItem(ctx, next) {
-        //Пример работы с валидатором напрямую
-        let id = Validator.isInt(ctx.request.query.id);
+    async getItem(ctx: Context): Promise<void> {
+        // Пример работы с валидатором напрямую
+        const id = Validator.isInt(ctx.request.query.id);
 
         ctx.body = await userModel.getItem(id);
     }
 
-    //TODO закрыть авторизационным middleware
-    async updateItem(ctx, next) {
-        let data = this.validateBody(ctx, (validator: ItemValidator) => {
+    // TODO закрыть авторизационным middleware
+    async updateItem(ctx: Context): Promise<void> {
+        const data = this.validateBody(ctx, (validator) => {
             return {
                 id: validator.isInt('id'),
                 name: validator.escape('name')
@@ -53,10 +49,10 @@ module.exports = class UsersCtrl extends Controller {
     }
 
     //TODO закрыть авторизационным middleware
-    async deleteItem(ctx, next) {
-        let id = Validator.isInt(ctx.request.body.id);
+    async deleteItem(ctx: Context): Promise<void> {
+        const id = Validator.isInt(ctx.request.body.id);
 
         ctx.body = await userModel.deleteItem(id);
     }
-};
+}
 

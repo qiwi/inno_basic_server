@@ -1,17 +1,23 @@
-const config = require('./config');
+import * as config from 'config';
 
-const Pool = require('pg-pool'),
-    pool = new Pool(config.db);
-
-const Pg = require('./innotrio/db/pg');
+import {Pool as IPool} from 'pg-pool';
+import {Pg} from './innotrio/db/pg';
+/**
+ * NOTE: Декларация pg-pool и его имплементация немного различаются (видимо баг), поэтому подключим через require.
+ */
+const Pool = require('pg-pool');
+const pool: IPool = new Pool(config.get('db'));
 global.pg = new Pg(pool);
 
-const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const router = require('./app/routes');
-const errorMiddleware = require('./innotrio/koa/error_middleware');
+
+import * as Koa from 'koa';
+import * as bodyParser from 'koa-bodyparser';
+import {router} from './app/routes';
+import {errorMiddleware} from './innotrio/koa/error_middleware';
 
 const app = new Koa();
+const appPort = config.get('port');
+
 app.use(bodyParser());
 app.use(errorMiddleware);
 app.use(router.routes());
@@ -22,7 +28,7 @@ app.on('error', (err, ctx) => console.log('REQUEST_ERROR', err, ctx));
 process.on('uncaughtException', (err) => console.log('PROCESS_EXCEPTION', err.stack));
 
 
-app.listen(config.port, () => console.log('Server listening on port ' + config.port));
+app.listen(appPort, () => console.log('Server listening on port ' + appPort));
 
 //непереведенные старые части
 /*

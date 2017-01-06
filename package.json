@@ -3,27 +3,32 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "node --harmony-async-await build/app.js",
-    "build": "babel . -d build --ignore node_modules"
+    "start": "node --harmony-async-await app.js",
+    "build": "tsc",
+    "watch": "nodemon --ext ts --ignore /*.js --exec 'npm run build; npm run start;'"
   },
   "author": "",
   "license": "",
   "description": "",
   "private": true,
   "dependencies": {
+    "@types/config": "0.0.31",
+    "@types/koa": "^2.0.37",
+    "@types/koa-bodyparser": "^3.0.22",
+    "@types/koa-router": "^7.0.21",
+    "@types/pg": "^6.1.34",
+    "@types/pg-pool": "0.0.2",
+    "@types/validator": "^5.7.35",
+    "config": "^1.24.0",
+    "crypto": "0.0.3",
     "koa": "^2.0.0",
-    "koa-router": "^7.1.0",
     "koa-bodyparser": "^3.2",
-    "validator": "^6.2",
+    "koa-router": "^7.1.0",
     "pg": "^6.1",
-    "pg-pool": "^1.5"
+    "pg-pool": "^1.5",
+    "validator": "^6.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-eslint": "^7.1.1",
-    "babel-plugin-transform-flow-strip-types": "^6.21.0",
-    "eslint": "^3.12.2",
-    "eslint-plugin-flowtype": "^2.29.2",
-    "flow-bin": "^0.37.4"
+    "nodemon": "^1.11.0"
   }
 }

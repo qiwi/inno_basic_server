@@ -1,34 +1,23 @@
-module.exports = class ResultError {
+export const ERROR_PREFIX = 'ERROR_';
+
+export class ResultError {
     code: string;
     status: number;
     logObject: any;
 
-    constructor(code: string, httpStatus: string|void, internalLogObject:any|void) {
-        this.code = 'ERROR_'+code;
+    constructor(code: string, httpStatus?: number, internalLogObject?: any) {
+        this.code = ERROR_PREFIX + code;
         this.status = httpStatus || 400;
         this.logObject = internalLogObject || {};
     }
 
-    /**
-     * Проверяем является ли объект ошибкой
-     */
-    static isError(value: any) {
-        value = value || {};
-        let code = value.code || '';
-        let status = value.status || '';
-
-        if (code.length > 0 && status.toString().length > 0) {
-            return true;
-        }
-        return false;
+    static isError(value: any): boolean {
+        return value instanceof ResultError;
     }
 
     static logError(code: string, message: string, logObject: any) {
-        var objectText = '';
-        if (logObject !== undefined) {
-            objectText = JSON.stringify(logObject);
-        }
-
-        console.log((new Date()).toISOString() + "Error \n" + code + ": " + message + "\ndata: " + objectText);
+        console.error(
+            (new Date()).toISOString() + " Error \n" + code + ": " + message + "\ndata: " + JSON.stringify(logObject || {})
+        );
     }
 };

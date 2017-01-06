@@ -1,53 +1,53 @@
-/**
- * Created by g.konnov on 31.12.2016.
- */
+import * as validator from 'validator';
+import {ResultError} from '../error';
 
-const validator = require('validator'),
-    ResultError = require('../error');
+export const VALIDATION_NO_INT = 'VALIDATION_NO_INT';
+export const VALIDATION_NO_STRING = 'VALIDATION_NO_STRING';
+export const VALIDATION_NO_EMAIL = 'VALIDATION_NO_EMAIL';
 
-module.exports = class Validator {
+export const DEFAULT_CODE = 400;
+
+export class Validator {
     /**
      * Проверяет, что значение - целое число. undefined не принимает.
      */
-    static isInt(value) {
+    static isInt(value: any): any | never {
         if (!isNaN(value) && validator.isInt(value)) {
             return value;
         } else {
-            throw new ResultError('VALIDATION_NOT_INT', 400, value);
+            throw new ResultError(VALIDATION_NO_INT, DEFAULT_CODE, value);
         }
     }
 
     /**
      * Эскейпит строку. Не проверяет наличие.
      */
-    static escape(value) {
+    static escape(value: string): string {
         return validator.escape(value || '');
     }
 
     /**
      * Проверяет, что значение - строка, эскейпит, тримит. undefined вызовет ошибку.
      */
-    static isString(value) {
-        value = value || '';
-        value = value.trim();
-
-        if (value.length > 0) {
-            return Validator.escape(value);
-        } else {
-            throw new ResultError('VALIDATION_NO_STRING', 400, value);
+    static isString(value: any): any | never {
+        let processedValue;
+        if (typeof value !== 'string' || (processedValue = value.trim()).length === 0) {
+            throw new ResultError(VALIDATION_NO_STRING, DEFAULT_CODE, value);
         }
+
+        return Validator.escape(processedValue);
     }
 
     /**
      * Проверяет, что передан email + lowercase+trim+escape
      */
-    static isEmail(value) {
-        let email = Validator.isString(value).toLowerCase();
+    static isEmail(value: any): string | never {
+        const email = Validator.isString(value).toLowerCase();
 
         if (validator.isEmail(email)) {
             return email;
         } else {
-            throw new ResultError('VALIDATION_NOT_EMAIL', 400, value);
+            throw new ResultError(VALIDATION_NO_EMAIL, DEFAULT_CODE, value);
         }
     }
 
