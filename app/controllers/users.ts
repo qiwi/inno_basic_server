@@ -1,16 +1,16 @@
+import {Context} from 'koa';
 import {Controller} from '../../innotrio/koa/controller';
 import {UsersModel} from '../models/users';
-// Валидатор, который подключаем только если используется напрямую.
-import {Validator} from '../../innotrio/validation/validator';
-import {Context} from 'koa';
+import {Validator} from '../../innotrio/validation/validator'; // Валидатор, который подключаем только если используется напрямую.
 import {IValidator} from "../../innotrio/validation/interfaces";
+
 const userModel = new UsersModel(global.pg);
 
 /**
  * Контроллер, куда приходят все запросы, описанные в routes
  */
 export class Users extends Controller {
-    async addItem(ctx: Context): Promise<void> {
+    async addItem(ctx:Context): Promise<void> {
         //Если получается несколько полей, то лучше использовать validateBody или validateQuery,
         //так не потребуется много раз прописывать ctx.request.query.
         //Также в ошибке валидации вернется поле, которое не прошло валидацию.

@@ -30,7 +30,7 @@ process.on('uncaughtException', (err) => console.log('PROCESS_EXCEPTION', err.st
 
 app.listen(appPort, () => console.log('Server listening on port ' + appPort));
 
-//непереведенные старые части
+// непереведенные старые части
 /*
  //CORS middleware
  var allowCrossDomain = function (req, res, next) {
