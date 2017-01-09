@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node --harmony-async-await app.js",
     "build": "tsc",
-    "watch": "nodemon --ext ts --ignore /*.js --exec 'npm run build; npm run start;'",
+    "watch": "nodemon --ext ts --ignore /*.js --exec \"npm run build & npm run start\"",
     "lint": "tslint '*/*.ts' --type-check --project tsconfig.json "
   },
   "author": "",
