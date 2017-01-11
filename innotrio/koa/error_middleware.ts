@@ -6,14 +6,12 @@ export async function errorMiddleware(ctx: Context, next: Function): Promise<any
         await next();
     } catch (err) {
         const error = ResultError.isError(err) ? err : new ResultError('INTERNAL', 500, err);
-        console.log(err);
 
-        ResultError.logError(error.code, error.status, error.logObject);
+        error.log();
         ctx.status = parseInt(error.status);
         ctx.body = {
-            status: error.status,
-            code: error.code,
-            data: error.logObject
+            status: 'error',
+            code: error.code
         };
     }
 }

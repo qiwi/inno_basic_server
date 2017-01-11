@@ -15,6 +15,10 @@ export class UsersModel extends PgModel {
         return await this.pg.getRow('SELECT id_user, user_email, user_name FROM koa.obj_user WHERE id_user = $1', [idUser]);
     }
 
+    async getItemByEmail(email: string): Promise<{}> {
+        return await this.pg.getRow('SELECT id_user FROM koa.obj_user WHERE user_email = $1', [email]);
+    }
+
     async updateItem(idUser: number, name: string): Promise<boolean> {
         return await this.pg.run('UPDATE koa.obj_user SET user_name = $2 WHERE id_user = $1', [idUser, name]);
     }

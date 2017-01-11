@@ -3,6 +3,7 @@ import {Controller} from '../../innotrio/koa/controller';
 import {UsersModel} from '../models/users';
 import {Validator} from '../../innotrio/validation/validator'; // Валидатор, который подключаем только если используется напрямую.
 import {IValidator} from "../../innotrio/validation/interfaces";
+import {ResultError} from "../../innotrio/error";
 
 const userModel = new UsersModel(global.pg);
 
@@ -21,6 +22,10 @@ export class Users extends Controller {
                 password: validator.isString('password')
             };
         });
+
+        const oldUser = await userModel.getItemByEmail(data.email);
+        if (oldUser)
+            throw new ResultError('USER_EXISTS');
 
         ctx.body = await userModel.addItem(data.email, data.name, data.password);
     }
