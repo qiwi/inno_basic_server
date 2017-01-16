@@ -7,7 +7,7 @@ node_modules
 .idea
 *.bak
 build
-config/default.ts
-config/production.ts
+config/default.json
+config/production.json
 *.js
 *.js.map

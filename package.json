@@ -14,7 +14,7 @@
   "dependencies": {
     "config": "^1.24.0",
     "crypto": "0.0.3",
-    "inno_ts": "git+https://github.com/qiwi/inno_ts.git",
+    "inno_ts": "^1.0.4",
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.2",
     "koa-router": "^7.1.0",
