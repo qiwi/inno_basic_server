@@ -9,6 +9,8 @@
     "object-literal-sort-keys": false,
     "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
     "promise-function-async": true,
+    "only-arrow-functions": false,
+    "no-shadowed-variable": false,
     "typedef": [true, "call-signature",
       "parameter",
       "property-declaration",
