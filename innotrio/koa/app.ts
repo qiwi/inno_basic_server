@@ -1,30 +1,37 @@
-const config = require('./config');
-
-const Pool = require('pg-pool'),
-    pool = new Pool(config.db);
-
-const Pg = require('./innotrio/db/pg');
-global.pg = new Pg(pool);
-
-const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const router = require('./app/routes');
-const errorMiddleware = require('./innotrio/koa/error_middleware');
-
-const app = new Koa();
-app.use(bodyParser());
-app.use(errorMiddleware);
-app.use(router.routes());
-app.use(router.allowedMethods());
+import * as Koa from "koa";
+import * as bodyParser from 'koa-bodyparser';
+import {errorMiddleware} from './error_middleware';
+import Router = require("koa-router");
 
 
-app.on('error', (err, ctx) => console.log('REQUEST_ERROR', err, ctx));
-process.on('uncaughtException', (err) => console.log('PROCESS_EXCEPTION', err.stack));
+export class App {
+
+    public koa: Koa;
+
+    constructor(config, router:Router) {
+        this.initKoa(config,router);
+    }
+
+    private initKoa(config, router:Router): void {
+        const app = new Koa();
+        const appPort = config.get('port');
+
+        app.use(bodyParser());
+        app.use(errorMiddleware);
+        app.use(router.routes());
+        app.use(router.allowedMethods());
 
 
-app.listen(config.port, () => console.log('Server listening on port ' + config.port));
+        app.on('error', (err, ctx) => console.log('REQUEST_ERROR', err, ctx));
+        process.on('uncaughtException', (err) => console.log('PROCESS_EXCEPTION', err.stack));
 
-//непереведенные старые части
+        app.listen(appPort, () => console.log('Server listening on port ' + appPort));
+        this.koa = app;
+    }
+}
+
+
+// непереведенные старые части
 /*
  //CORS middleware
  var allowCrossDomain = function (req, res, next) {

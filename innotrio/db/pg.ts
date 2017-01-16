@@ -1,17 +1,14 @@
-//@flow
-const ResultError = require('../error');
+import {ResultError} from '../error';
+import {Pool} from 'pg-pool';
 
-/**
- * Created by g.konnov on 03.01.2017.
- */
-module.exports = class Pg {
-    pool: *;
+export class Pg {
+    pool: Pool;
 
-    constructor(pgPool: *) {
+    constructor(pgPool: Pool) {
         this.pool = pgPool;
-    }
+    };
 
-    async _run(query: string, params: Array<string>|void) {
+    async _run(query: string, params?: Array<string | number>): Promise<any> | never {
         try {
             return await this.pool.query(query, params);
         } catch (err) {
@@ -22,7 +19,7 @@ module.exports = class Pg {
     /**
      * Просто выполняем запрос
      */
-    async run(query: string, params: Array<string>|void) {
+    async run(query: string, params?: Array<string | number>): Promise<boolean> {
         await this._run(query, params);
         return true;
     }
@@ -30,7 +27,7 @@ module.exports = class Pg {
     /**
      * Возвращаем массив объектов
      */
-    async getRows(query: string, params: Array<string>|void) {
+    async getRows(query: string, params?: Array<string | number>): Promise<Array<{}>> {
         let items = await this._run(query, params);
         return items.rows;
     }
@@ -38,9 +35,9 @@ module.exports = class Pg {
     /**
      * Возвращаем объект
      */
-    async getRow(query: string, params: Array<string>|void) {
-        let items = await this._run(query, params);
-        let rows = items.rows || [];
+    async getRow(query: string, params?: Array<string | number>): Promise<{}> {
+        const items = await this._run(query, params);
+        const rows = items.rows || [];
         if (rows.length == 0) {
             return false;
         }
@@ -58,26 +55,11 @@ module.exports = class Pg {
      * @param query
      * @param params
      */
-    async mustGetRow(errorCode: string, query: string, params: Array<string>|void) {
-        let row = this.getRow(query, params);
-        if (row == false) {
-            throw new ResultError('DB_NO_SUCH_'.errorCode);
+    async mustGetRow(errorCode: number, query: string, params?: Array<string | number>): Promise<{}> | never {
+        const row = await this.getRow(query, params);
+        if (row === false) {
+            throw new ResultError('DB_NO_SUCH_', errorCode);
         }
         return row;
     }
-
-
-    /*
-     func (self *Model)logError(err error, message string) (safeerror.ISafeError) {
-     if (err != nil) {
-     if len(message) > LOG_MESSAGE_LENGTH {
-     message = message[:LOG_MESSAGE_LENGTH]
-     }
-     fmt.Println("DB_ERROR", err, message)
-     return safeerror.New(err, "DB_ERROR")
-     }
-     return nil
-     }
-
-     */
-};
+}

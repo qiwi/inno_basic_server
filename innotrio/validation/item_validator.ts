@@ -1,14 +1,10 @@
-/**
- * Created by g.konnov on 31.12.2016.
- */
+import {Validator} from './validator';
+import {IValidator} from "./interfaces";
 
-const Validator = require('./validator');
-
-/**
- * Валидатор, облегчающий массовую валидацию полей в контроллере
- */
 //TODO добавить здесь обертку для возврата поля, которое не прошло валидацию
-module.exports = class ItemValidator {
+export class ItemValidator implements IValidator {
+    item: {};
+
     constructor(item) {
         this.item = item;
     }
@@ -16,29 +12,28 @@ module.exports = class ItemValidator {
     /**
      * Проверяет, что значение - целое число. undefined не принимает.
      */
-    isInt(field) {
+    isInt(field: any): any | never {
         return Validator.isInt(this.item[field]);
     }
 
     /**
      * Эскейпит строку. Не проверяет наличие.
      */
-    escape(field) {
+    escape(field: string): string {
         return Validator.escape(this.item[field]);
     }
 
     /**
      * Проверяет, что значение - строка, эскейпит, тримит. undefined вызовет ошибку.
      */
-    isString(field) {
+    isString(field: any): any | never {
         return Validator.isString(this.item[field]);
     }
 
     /**
      * Проверяет, что передан email + lowercase+trim+escape
      */
-    isEmail(field) {
+    isEmail(field: any): string | never {
         return Validator.isEmail(this.item[field]);
     }
-
-};
+}

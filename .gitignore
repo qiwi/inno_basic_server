@@ -6,3 +6,8 @@ node_modules
 .node_repl_history
 .idea
 *.bak
+build
+config/default.ts
+config/production.ts
+*.js
+*.js.map
