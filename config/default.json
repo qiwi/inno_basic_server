@@ -1,0 +1,14 @@
+{
+    "port": 2211,
+    "url": "/api/",
+    "db": {
+        "host": "127.0.0.1",
+        "port": 5432,
+        "database": "koa",
+        "user": "postgres",
+        "password": "postgres",
+
+        "max": 10,
+        "idleTimeoutMillis": 30000
+    }
+}
