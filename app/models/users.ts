@@ -1,6 +1,6 @@
-import {Hash} from 'inno_ts';
+import {Hash} from 'innots';
 import {Pool as IPool} from 'pg-pool';
-import {PgService} from "inno_ts";
+import {PgService} from "innots";
 import * as config from 'config';
 import {QueryResult} from "pg";
 
