@@ -2,6 +2,7 @@ import {Hash} from 'inno_ts';
 import {Pool as IPool} from 'pg-pool';
 import {PgService} from "inno_ts";
 import * as config from 'config';
+import {QueryResult} from "pg";
 
 /**
  * NOTE: Декларация pg-pool и его имплементация немного различаются (видимо баг), поэтому подключим через require.
@@ -31,11 +32,11 @@ export class UsersModel {
         return await pgService.getRow('SELECT id_user FROM koa.obj_user WHERE user_email = $1', [email]);
     }
 
-    public async updateItem(idUser: number, name: string): Promise<boolean> {
+    public async updateItem(idUser: number, name: string): Promise<QueryResult> {
         return await pgService.run('UPDATE koa.obj_user SET user_name = $2 WHERE id_user = $1', [idUser, name]);
     }
 
-    public async deleteItem(idUser: number): Promise<boolean> {
+    public async deleteItem(idUser: number): Promise<QueryResult> {
         return await pgService.run('DELETE FROM koa.obj_user WHERE id_user = $1', [idUser]);
     }
 }
