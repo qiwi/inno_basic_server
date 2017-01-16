@@ -14,7 +14,7 @@
   "dependencies": {
     "config": "^1.24.0",
     "crypto": "0.0.3",
-    "inno_ts": "git+ssh://git@github.qiwi.com:ecom-rnd/inno_ts.git#fdff919f5d52cd1f3e0536349e86c29b402b2ed0",
+    "inno_ts": "git+ssh://git@github.qiwi.com:ecom-rnd/inno_ts.git#ac1783dea26244ebb1d014901c8cdc4e8ab6fa77",
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.2",
     "koa-router": "^7.1.0",
