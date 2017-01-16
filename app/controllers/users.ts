@@ -1,9 +1,9 @@
 import {Context} from 'koa';
-import {Controller} from 'inno_ts';
+import {Controller} from 'innots';
 import {UsersModel} from '../models/users';
-import {Validator} from 'inno_ts'; // Валидатор, который подключаем только если используется напрямую.
-import {IValidator} from "inno_ts";
-import {ResultError} from "inno_ts";
+import {Validator} from 'innots'; // Валидатор, который подключаем только если используется напрямую.
+import {IValidator} from "innots";
+import {ResultError} from "innots";
 
 const userModel = new UsersModel();
 
