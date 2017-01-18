@@ -5,16 +5,64 @@ import {Users as UsersController} from './controllers/users';
 const router = new Router();
 const users = new UsersController();
 
-/** Функция сохранения контекста для класса контроллера. Иначе в контроллере контект будет от koa */
-const context = (classItem, classMethod) => {
-    return async(ctx, next) => await classMethod.call(classItem, ctx, next);
-};
-
+// TODO routes refactoring
 router
-    .post(config.get('url') + 'user', context(users, users.addItem))
-    .get(config.get('url') + 'users', context(users, users.getItems))
-    .get(config.get('url') + 'user', context(users, users.getItem))
-    .patch(config.get('url') + 'user', context(users, users.updateItem))
-    .delete(config.get('url') + 'user', context(users, users.deleteItem));
+    /**
+     * @api {post} /user
+     * @apiName createUser
+     * @apiGroup User
+     *
+     * @apiDescription Добавляет нового пользователя
+     *
+     * @apiParam {String} email Почта пользователя.
+     * @apiParam {String} name Имя пользователя.
+     * @apiParam {String} password Пароль пользователя.
+     *
+     * @apiSuccess {Object} result Созданный пользователь.
+     */
+    .post(config.get('url') + 'user', users.addItem)
+    /**
+     * @api {get} /users
+     * @apiName getUsers
+     * @apiGroup User
+     *
+     * @apiDescription Возвращает список созданных юзеров
+     *
+     * @apiSuccess {Array} result Массив созданных пользователей.
+     */
+    .get(config.get('url') + 'users', users.getItems)
+    /**
+     * @api {get} /user
+     * @apiName getUser
+     * @apiGroup User
+     *
+     * @apiDescription Возвращает список созданных юзеров
+     * @apiParam {String} id Идентификатор пользователя.
+     *
+     * @apiSuccess {Object} result пользователь.
+     */
+    .get(config.get('url') + 'user', users.getItem)
+    /**
+     * @api {patch} /user
+     * @apiName patchUser
+     * @apiGroup User
+     *
+     * @apiDescription Обновление пользователя
+     * @apiParam {String} id Идентификатор пользователя.
+     *
+     * @apiSuccess {Object} result обновленный пользователь.
+     */
+    .patch(config.get('url') + 'user', users.updateItem)
+    /**
+     * @api {delete} /user
+     * @apiName deleteUser
+     * @apiGroup User
+     *
+     * @apiDescription Удаление пользователя
+     * @apiParam {String} id Идентификатор пользователя.
+     *
+     * @apiSuccess {Boolean} result результат удаления.
+     */
+    .delete(config.get('url') + 'user', users.deleteItem);
 
 export {router};
