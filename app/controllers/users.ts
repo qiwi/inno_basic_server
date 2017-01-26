@@ -24,7 +24,7 @@ export class Users extends Controller {
         if (oldUser) {
             throw new ResultError('USER_EXISTS');
         }
-        // TODO this.success in controller?
+        // TODO success result middleware
         ctx.body = {result: await userModel.addItem(data.email, data.name, data.password)}
     }
 

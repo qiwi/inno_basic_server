@@ -5,10 +5,11 @@ import {Users as UsersController} from './controllers/users';
 const router = new Router();
 const users = new UsersController();
 
-// TODO routes refactoring
+const userBaseRoute = config.get('url') + 'users/';
+
 router
     /**
-     * @api {post} /user
+     * @api {post} /users/add
      * @apiName createUser
      * @apiGroup User
      *
@@ -20,9 +21,9 @@ router
      *
      * @apiSuccess {Object} result Созданный пользователь.
      */
-    .post(config.get('url') + 'user', users.addItem)
+    .post(userBaseRoute + 'add', users.addItem)
     /**
-     * @api {get} /users
+     * @api {get} /users/items
      * @apiName getUsers
      * @apiGroup User
      *
@@ -30,9 +31,9 @@ router
      *
      * @apiSuccess {Array} result Массив созданных пользователей.
      */
-    .get(config.get('url') + 'users', users.getItems)
+    .get(userBaseRoute + 'items', users.getItems)
     /**
-     * @api {get} /user
+     * @api {get} /users/item
      * @apiName getUser
      * @apiGroup User
      *
@@ -41,10 +42,10 @@ router
      *
      * @apiSuccess {Object} result пользователь.
      */
-    .get(config.get('url') + 'user', users.getItem)
+    .get(userBaseRoute + 'item', users.getItem)
     /**
-     * @api {patch} /user
-     * @apiName patchUser
+     * @api {post} /users/update
+     * @apiName updateUser
      * @apiGroup User
      *
      * @apiDescription Обновление пользователя
@@ -52,9 +53,9 @@ router
      *
      * @apiSuccess {Object} result обновленный пользователь.
      */
-    .patch(config.get('url') + 'user', users.updateItem)
+    .post(userBaseRoute + 'update', users.updateItem)
     /**
-     * @api {delete} /user
+     * @api {post} /users/remove
      * @apiName deleteUser
      * @apiGroup User
      *
@@ -63,6 +64,6 @@ router
      *
      * @apiSuccess {Boolean} result результат удаления.
      */
-    .delete(config.get('url') + 'user', users.deleteItem);
+    .post(userBaseRoute + 'remove', users.deleteItem);
 
 export {router};

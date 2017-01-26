@@ -38,6 +38,7 @@ export class UsersModel {
     }
 
     public async updateItem(idUser: number, name: string): Promise<IUser> {
+        // TODO returning
         await pgService.run('UPDATE koa.obj_user SET user_name = $2 WHERE id_user = $1', [idUser, name]);
         return await this.getItem(idUser);
     }
