@@ -25,18 +25,18 @@ export class Users extends Controller {
             throw new ResultError('USER_EXISTS');
         }
         // TODO success result middleware
-        ctx.body = {result: await userModel.addItem(data.email, data.name, data.password)}
+        ctx.body = {result: await userModel.addItem(data.email, data.name, data.password)};
     }
 
     public getItems = async (ctx: Context): Promise<void> => {
-        ctx.body = {result: await userModel.getItems()}
+        ctx.body = {result: await userModel.getItems()};
     }
 
     public getItem = async (ctx: Context): Promise<void> => {
         // Пример работы с валидатором напрямую
         const id = Validator.isInt(ctx.request.query.id);
 
-        ctx.body = {result: await userModel.getItem(id)}
+        ctx.body = {result: await userModel.getItem(id)};
     }
 
     // TODO закрыть авторизационным middleware
@@ -48,13 +48,13 @@ export class Users extends Controller {
             };
         });
 
-        ctx.body = {result: await userModel.updateItem(data.id, data.name)}
+        ctx.body = {result: await userModel.updateItem(data.id, data.name)};
     }
 
     // TODO закрыть авторизационным middleware
     public deleteItem = async (ctx: Context): Promise<void> => {
         const id = Validator.isInt(ctx.request.body.id);
 
-        ctx.body = {result: await userModel.deleteItem(id)}
+        ctx.body = {result: await userModel.deleteItem(id)};
     }
 }
