@@ -7,7 +7,9 @@ import * as config from 'config';
  * NOTE: Декларация pg-pool и его имплементация немного различаются (видимо баг), поэтому подключим через require.
  */
 // TODO Пока не реализован глобальный контекст/иной вариант переиспользования пула - создаем его в рамках модели
+/* tslint:disable */
 const Pool = require('pg-pool');
+/* tslint:enable */
 const pool: IPool = new Pool(config.get('db'));
 const pgService = new PgService(pool);
 
@@ -38,6 +40,7 @@ export class UsersModel {
     }
 
     public async updateItem(idUser: number, name: string): Promise<IUser> {
+        // TODO returning
         await pgService.run('UPDATE koa.obj_user SET user_name = $2 WHERE id_user = $1', [idUser, name]);
         return await this.getItem(idUser);
     }
