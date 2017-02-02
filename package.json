@@ -14,9 +14,10 @@
   "private": true,
   "dependencies": {
     "config": "^1.24.0",
-    "innots": "0.0.4",
+    "innots": "0.0.13",
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.2",
+    "koa-jwt": "^1.3.1",
     "koa-router": "^7.1.0",
     "pg-pool": "^1.5"
   },

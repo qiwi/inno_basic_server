@@ -3,7 +3,7 @@ import {Controller} from 'innots';
 import {UsersModel} from '../models/users';
 import {Validator} from 'innots'; // Валидатор, который подключаем только если используется напрямую.
 import {IValidator} from "innots";
-import {ResultError} from "innots";
+import {InnoError} from "innots";
 
 const userModel = new UsersModel();
 
@@ -22,24 +22,23 @@ export class Users extends Controller {
 
         const oldUser = await userModel.getItemByEmail(data.email);
         if (oldUser) {
-            throw new ResultError('USER_EXISTS');
+            throw new InnoError('USER_EXISTS', 400);
         }
         // TODO success result middleware
-        ctx.body = {result: await userModel.addItem(data.email, data.name, data.password)};
-    }
+        ctx.body = await userModel.addItem(data.email, data.name, data.password);
+    };
 
     public getItems = async (ctx: Context): Promise<void> => {
-        ctx.body = {result: await userModel.getItems()};
-    }
+        ctx.body = await userModel.getItems();
+    };
 
     public getItem = async (ctx: Context): Promise<void> => {
         // Пример работы с валидатором напрямую
         const id = Validator.isInt(ctx.request.query.id);
 
-        ctx.body = {result: await userModel.getItem(id)};
-    }
+        ctx.body = await userModel.getItem(id);
+    };
 
-    // TODO закрыть авторизационным middleware
     public updateItem = async (ctx: Context): Promise<void> => {
         const data = this.validateBody(ctx, (validator) => {
             return {
@@ -48,13 +47,12 @@ export class Users extends Controller {
             };
         });
 
-        ctx.body = {result: await userModel.updateItem(data.id, data.name)};
-    }
+        ctx.body = await userModel.updateItem(data.id, data.name);
+    };
 
-    // TODO закрыть авторизационным middleware
     public deleteItem = async (ctx: Context): Promise<void> => {
         const id = Validator.isInt(ctx.request.body.id);
 
-        ctx.body = {result: await userModel.deleteItem(id)};
+        ctx.body = await userModel.deleteItem(id);
     }
 }

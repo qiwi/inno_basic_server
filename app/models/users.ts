@@ -49,4 +49,14 @@ export class UsersModel {
         await pgService.run('DELETE FROM koa.obj_user WHERE id_user = $1', [idUser]);
         return true;
     }
+
+    public async checkUser(email: string, password: string): Promise<boolean> {
+        const user = this.getItemByEmail(email);
+
+        if (!user) {
+            return false;
+        }
+
+        return Hash.getSha256(password) === password;
+    }
 }

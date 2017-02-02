@@ -1,9 +1,11 @@
 import * as Router from 'koa-router';
 import * as config from 'config';
 import {Users as UsersController} from './controllers/users';
+import {Auth as AuthController} from './controllers/auth';
 
 const router = new Router();
 const users = new UsersController();
+const auth = new AuthController();
 
 const userBaseRoute = config.get('url') + 'users/';
 
@@ -64,6 +66,8 @@ router
      *
      * @apiSuccess {Boolean} result результат удаления.
      */
-    .post(userBaseRoute + 'remove', users.deleteItem);
+    .post(userBaseRoute + 'remove', users.deleteItem)
+    //TODO own router
+    .post('/public/login', auth.login);
 
 export {router};
