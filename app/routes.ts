@@ -67,6 +67,17 @@ router
      * @apiSuccess {Boolean} result результат удаления.
      */
     .post(userBaseRoute + 'remove', users.deleteItem)
+    /**
+     * @api {post} /public/login
+     * @apiName auth
+     * @apiGroup Auth
+     *
+     * @apiDescription Попытка залогиниться.
+     * @apiParam {String} email Email пользователя.
+     * @apiParam {String} password Пароль.
+     *
+     * @apiSuccess {String} result token.
+     */
     //TODO own router
     .post('/public/login', auth.login);
 
