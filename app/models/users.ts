@@ -14,9 +14,9 @@ const pool: IPool = new Pool(config.get('db'));
 const pgService = new PgService(pool);
 
 export interface IUser {
-    email: string;
-    name: string;
-    password: string;
+    user_email: string;
+    user_name: string;
+    user_password: string;
 }
 
 export class UsersModel {
@@ -36,7 +36,8 @@ export class UsersModel {
     }
 
     public async getItemByEmail(email: string): Promise<IUser> {
-        return await pgService.getRow('SELECT id_user FROM koa.obj_user WHERE user_email = $1', [email]);
+        return await pgService.getRow('SELECT id_user, user_email, user_password' +
+            ' FROM koa.obj_user WHERE user_email = $1', [email]);
     }
 
     public async updateItem(idUser: number, name: string): Promise<IUser> {
@@ -51,12 +52,12 @@ export class UsersModel {
     }
 
     public async checkUser(email: string, password: string): Promise<boolean> {
-        const user = this.getItemByEmail(email);
+        const user = await this.getItemByEmail(email);
 
         if (!user) {
             return false;
         }
 
-        return Hash.getSha256(password) === password;
+        return Hash.getSha256(password) === user.user_password;
     }
 }

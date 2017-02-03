@@ -10,7 +10,7 @@ import * as config from 'config'
 const userModel = new UsersModel();
 
 export class Auth extends Controller {
-    public login = async (ctx: Context): Promise<void> => {
+    public login = async (ctx: Context, next: Function): Promise<void> => {
         const data = this.validateBody(ctx, (validator: IValidator) => {
             return {
                 email: validator.isEmail('email'),
@@ -26,5 +26,6 @@ export class Auth extends Controller {
 
 
         ctx.body = jsonWebToken.sign({user: data.email}, config.get<string>('jwt.secret'));
+        next();
     };
 }

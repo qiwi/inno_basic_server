@@ -1,7 +1,7 @@
 import * as Router from 'koa-router';
 import * as config from 'config';
-import {Users as UsersController} from '../controllers/users';
-import {Auth as AuthController} from '../controllers/auth';
+import {Users as UsersController} from './controllers/users';
+import {Auth as AuthController} from './controllers/auth';
 
 const router = new Router();
 const users = new UsersController();
@@ -66,6 +66,18 @@ router
      *
      * @apiSuccess {Boolean} result результат удаления.
      */
-    .post(userBaseRoute + 'remove', users.deleteItem);
+    .post(userBaseRoute + 'remove', users.deleteItem)
+    /**
+     * @api {post} /public/login
+     * @apiName auth
+     * @apiGroup Auth
+     *
+     * @apiDescription Попытка залогиниться.
+     * @apiParam {String} email Email пользователя.
+     * @apiParam {String} password Пароль.
+     *
+     * @apiSuccess {String} result token.
+     */
+    .post(config.get('url') + 'public/auth/login/', auth.login);
 
 export {router};
