@@ -1,60 +1,64 @@
 import {Context} from 'koa';
-import {Controller} from 'innots';
+import {Controller, ItemValidator} from 'innots';
 import {UsersModel} from '../models/users';
 import {Validator} from 'innots'; // Валидатор, который подключаем только если используется напрямую.
-import {IValidator} from "innots";
-import {ResultError} from "innots";
+import {InnoError} from "innots";
 
 const userModel = new UsersModel();
 
 export class Users extends Controller {
-    public addItem = async (ctx: Context): Promise<void> => {
-        // Если получается несколько полей, то лучше использовать validateBody или validateQuery,
-        // так не потребуется много раз прописывать ctx.request.query.
+    public addItem = async(ctx: Context, next: Function): Promise<void> => {
+        // Если получается несколько полей, то лучше использовать validate
+        // так не потребуется много раз прописывать ctx.request.query/body.
         // Также в ошибке валидации вернется поле, которое не прошло валидацию.
-        const data = this.validateBody(ctx, (validator: IValidator) => {
+        // В ItemValidator есть объект item, который можно проверять отдельно
+        const data = this.validate(ctx, (validator: ItemValidator) => {
             return {
                 email: validator.isEmail('email'),
-                name: validator.escape('name'),
+                //опциональный параметр
+                name: validator.optional.escape('name') || '',
                 password: validator.isString('password')
             };
         });
 
         const oldUser = await userModel.getItemByEmail(data.email);
         if (oldUser) {
-            throw new ResultError('USER_EXISTS');
+            throw new InnoError('USER_EXISTS', InnoError.CODE_BAD_REQUEST);
         }
-        // TODO success result middleware
-        ctx.body = {result: await userModel.addItem(data.email, data.name, data.password)};
-    }
 
-    public getItems = async (ctx: Context): Promise<void> => {
-        ctx.body = {result: await userModel.getItems()};
-    }
+        ctx.body = await userModel.addItem(data.email, data.name, data.password);
+        next();
+    };
 
-    public getItem = async (ctx: Context): Promise<void> => {
+    public getItems = async(ctx: Context, next: Function): Promise<void> => {
+        ctx.body = await userModel.getItems();
+        next();
+    };
+
+    public getItem = async(ctx: Context, next: Function): Promise<void> => {
         // Пример работы с валидатором напрямую
         const id = Validator.isInt(ctx.request.query.id);
 
-        ctx.body = {result: await userModel.getItem(id)};
-    }
+        ctx.body = await userModel.getItem(id);
+        next();
+    };
 
-    // TODO закрыть авторизационным middleware
-    public updateItem = async (ctx: Context): Promise<void> => {
-        const data = this.validateBody(ctx, (validator) => {
+    public updateItem = async(ctx: Context, next: Function): Promise<void> => {
+        const data = this.validate(ctx, (validator: ItemValidator) => {
             return {
                 id: validator.isInt('id'),
                 name: validator.escape('name')
             };
         });
 
-        ctx.body = {result: await userModel.updateItem(data.id, data.name)};
-    }
+        ctx.body = await userModel.updateItem(data.id, data.name);
+        next();
+    };
 
-    // TODO закрыть авторизационным middleware
-    public deleteItem = async (ctx: Context): Promise<void> => {
+    public deleteItem = async(ctx: Context, next: Function): Promise<void> => {
         const id = Validator.isInt(ctx.request.body.id);
 
-        ctx.body = {result: await userModel.deleteItem(id)};
+        ctx.body = await userModel.deleteItem(id);
+        next();
     }
 }
