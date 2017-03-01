@@ -1,9 +1,6 @@
 import {Context} from 'koa';
-import {Controller, AuthError} from 'innots';
+import {Controller, AuthError, ItemValidator} from 'innots';
 import {UsersModel} from '../models/users';
-import {Validator} from 'innots'; // Валидатор, который подключаем только если используется напрямую.
-import {IValidator} from "innots";
-import {InnoError} from "innots";
 import * as jsonWebToken from 'jsonwebtoken'
 import * as config from 'config'
 
@@ -11,7 +8,7 @@ const userModel = new UsersModel();
 
 export class Auth extends Controller {
     public login = async (ctx: Context, next: Function): Promise<void> => {
-        const data = this.validateBody(ctx, (validator: IValidator) => {
+        const data = this.validate(ctx, (validator: ItemValidator) => {
             return {
                 email: validator.isEmail('email'),
                 password: validator.isString('password')
