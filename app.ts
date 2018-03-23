@@ -1,6 +1,19 @@
-import * as config from 'config';
+import * as config from "config";
+import { IAppConfig, InnotsApp, PgPool, PgService } from "innots";
 
-import {router} from './app/routes';
-import {App} from "innots";
 
-const app = new App(config, router);
+import { router } from "./app/routes";
+
+const pgService = new PgService(new PgPool(config.get('db')));
+
+const app = new InnotsApp(config.get<IAppConfig>('appConfig'), router);
+
+app.bootstrap()
+    .then(() => {
+        console.log('server is listening on port', config.get('appConfig.port'));
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+
+export { app, pgService, config }

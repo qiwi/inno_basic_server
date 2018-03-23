@@ -1,13 +1,30 @@
 import * as Router from 'koa-router';
 import * as config from 'config';
+import { AuthController } from "./controllers/auth";
 import {Users as UsersController} from './controllers/users';
 
 const router = new Router();
 const users = new UsersController();
+const auth = new AuthController();
 
-const userBaseRoute = config.get('url') + 'users/';
+const usersRoute = config.get('appConfig.apiPrefix') + 'users/';
+const authRoute = config.get('appConfig.publicApiPrefix') + 'auth/';
 
 router
+    /**
+     * @api {post} public/auth/login
+     * @apiName createUser
+     * @apiGroup User
+     *
+     * @apiDescription Добавляет нового пользователя
+     *
+     * @apiParam {String} email Почта пользователя.
+     * @apiParam {String} name Имя пользователя.
+     * @apiParam {String} password Пароль пользователя.
+     *
+     * @apiSuccess {Object} result Созданный пользователь.
+     */
+    .post(authRoute + 'login', auth.login)
     /**
      * @api {post} /users/add
      * @apiName createUser
@@ -21,7 +38,7 @@ router
      *
      * @apiSuccess {Object} result Созданный пользователь.
      */
-    .post(userBaseRoute + 'add', users.addItem)
+    .post(usersRoute + 'add', users.addItem)
     /**
      * @api {get} /users/items
      * @apiName getUsers
@@ -31,7 +48,7 @@ router
      *
      * @apiSuccess {Array} result Массив созданных пользователей.
      */
-    .get(userBaseRoute + 'items', users.getItems)
+    .get(usersRoute + 'items', users.getItems)
     /**
      * @api {get} /users/item
      * @apiName getUser
@@ -42,7 +59,7 @@ router
      *
      * @apiSuccess {Object} result пользователь.
      */
-    .get(userBaseRoute + 'item', users.getItem)
+    .get(usersRoute + 'item', users.getItem)
     /**
      * @api {post} /users/update
      * @apiName updateUser
@@ -53,7 +70,7 @@ router
      *
      * @apiSuccess {Object} result обновленный пользователь.
      */
-    .post(userBaseRoute + 'update', users.updateItem)
+    .post(usersRoute + 'update', users.updateItem)
     /**
      * @api {post} /users/remove
      * @apiName deleteUser
@@ -64,6 +81,6 @@ router
      *
      * @apiSuccess {Boolean} result результат удаления.
      */
-    .post(userBaseRoute + 'remove', users.deleteItem);
+    .post(usersRoute + 'remove', users.deleteItem);
 
 export {router};

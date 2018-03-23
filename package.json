@@ -1,8 +1,8 @@
 {
-  "name": "koa-app",
-  "version": "0.0.1",
+  "name": "inno-basic-server",
+  "version": "1.0.0",
   "scripts": {
-    "start": "node --harmony-async-await app.js",
+    "start": "node app.js",
     "build": "tsc",
     "watch": "tsc --watch",
     "lint": "tslint 'app/**/*.ts' --type-check --project tsconfig.json",
@@ -13,22 +13,14 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "config": "^1.24.0",
-    "innots": "0.0.4",
-    "koa": "^2.0.0",
-    "koa-bodyparser": "^3.2",
-    "koa-router": "^7.1.0",
-    "pg-pool": "^1.5"
+    "innots": "^1.1.1",
+    "config": "^1.25.1",
+    "jsonwebtoken": "^7.3.0"
   },
   "devDependencies": {
-    "@types/config": "0.0.31",
-    "@types/koa": "^2.0.37",
-    "@types/koa-bodyparser": "^3.0.22",
-    "@types/koa-router": "^7.0.21",
-    "@types/pg-pool": "0.0.2",
-    "@types/validator": "^5.7.35",
-    "apidoc": "^0.17.3",
-    "tslint-eslint-rules": "^3.2.3",
-    "typescript": "^2.1.4"
+    "apidoc": "^0.17.5",
+    "tslint": "^5.7.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.6.2"
   }
 }
