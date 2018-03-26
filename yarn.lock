@@ -12,28 +12,12 @@
   dependencies:
     "@types/node" "*"
 
-"@types/bluebird@*":
-  version "3.5.20"
-  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.20.tgz#f6363172add6f4eabb8cada53ca9af2781e8d6a1"
-
 "@types/body-parser@*":
   version "1.16.8"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.16.8.tgz#687ec34140624a3bec2b1a8ea9268478ae8f3be3"
   dependencies:
     "@types/express" "*"
     "@types/node" "*"
-
-"@types/caseless@*":
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/@types/caseless/-/caseless-0.12.1.tgz#9794c69c8385d0192acc471a540d1f8e0d16218a"
-
-"@types/chai@^3.4.34":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-3.5.2.tgz#c11cd2817d3a401b7ba0f5a420f35c56139b1c1e"
-
-"@types/config@0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@types/config/-/config-0.0.31.tgz#34d8625b46c792625a118becc17ac3e815981b2f"
 
 "@types/connect@*":
   version "3.4.31"
@@ -68,12 +52,6 @@
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
-
-"@types/form-data@*":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@types/form-data/-/form-data-2.2.1.tgz#ee2b3b8eaa11c0938289953606b745b738c54b1e"
-  dependencies:
-    "@types/node" "*"
 
 "@types/http-assert@*":
   version "1.2.2"
@@ -135,10 +113,6 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
-"@types/mocha@^2.2.38":
-  version "2.2.48"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.48.tgz#3523b126a0b049482e1c3c11877460f76622ffab"
-
 "@types/node@*":
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.0.tgz#d3480ee666df9784b1001a1872a2f6ccefb6c2d7"
@@ -163,39 +137,12 @@
     "@types/node" "*"
     "@types/pg-types" "*"
 
-"@types/request-promise@^4.1.35":
-  version "4.1.41"
-  resolved "https://registry.yarnpkg.com/@types/request-promise/-/request-promise-4.1.41.tgz#1e254d51362d7edcb714b60cde303bcbe0ab1ee0"
-  dependencies:
-    "@types/bluebird" "*"
-    "@types/request" "*"
-
-"@types/request@*":
-  version "2.47.0"
-  resolved "https://registry.yarnpkg.com/@types/request/-/request-2.47.0.tgz#76a666cee4cb85dcffea6cd4645227926d9e114e"
-  dependencies:
-    "@types/caseless" "*"
-    "@types/form-data" "*"
-    "@types/node" "*"
-    "@types/tough-cookie" "*"
-
-"@types/request@^0.0.45":
-  version "0.0.45"
-  resolved "https://registry.yarnpkg.com/@types/request/-/request-0.0.45.tgz#c6e52be8b108eb035c35aa9af56a38a260c3e7e6"
-  dependencies:
-    "@types/form-data" "*"
-    "@types/node" "*"
-
 "@types/serve-static@*":
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.1.tgz#1d2801fa635d274cd97d4ec07e26b21b44127492"
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
-
-"@types/tough-cookie@*":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.2.tgz#e0d481d8bb282ad8a8c9e100ceb72c995fb5e709"
 
 "@types/validator@^5.7.35":
   version "5.7.35"
@@ -377,7 +324,7 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
-config@^1.25.1:
+config@^1.30.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/config/-/config-1.30.0.tgz#1d60a9f35348a13c175798d384e81a5a16c3ba6e"
   dependencies:
@@ -597,13 +544,11 @@ inherits@2, inherits@2.0.3, inherits@~2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-innots@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/innots/-/innots-1.1.2.tgz#d71f79442eacb482792cfcabc2c0d67038a75f42"
+innots@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/innots/-/innots-1.1.5.tgz#7b9bb248b44964bff909b0eb39935d5f4eee9dbc"
   dependencies:
     "@koa/cors" "^2.2.1"
-    "@types/chai" "^3.4.34"
-    "@types/config" "0.0.31"
     "@types/joi" "^10.4.0"
     "@types/jsonwebtoken" "^7.2.0"
     "@types/koa" "^2.0.39"
@@ -611,15 +556,12 @@ innots@^1.1.2:
     "@types/koa-router" "^7.0.21"
     "@types/lodash" "^4.14.68"
     "@types/log4js" "0.0.32"
-    "@types/mocha" "^2.2.38"
     "@types/oracledb" "^1.11.33"
     "@types/pg" "^7.4.5"
-    "@types/request" "^0.0.45"
-    "@types/request-promise" "^4.1.35"
     "@types/validator" "^5.7.35"
     camelcase-object "^1.0.0"
-    config "^1.25.1"
     joi "^10.6.0"
+    jsonwebtoken "^7.2.1"
     koa "^2.0.0"
     koa-body "^2.3.0"
     koa-jwt "^3.3.0"
@@ -702,6 +644,16 @@ jsonfile@^3.0.0:
 jsonwebtoken@7.4.1:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.1.tgz#7ca324f5215f8be039cd35a6c45bb8cb74a448fb"
+  dependencies:
+    joi "^6.10.1"
+    jws "^3.1.4"
+    lodash.once "^4.0.0"
+    ms "^2.0.0"
+    xtend "^4.0.1"
+
+jsonwebtoken@^7.2.1:
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.3.tgz#77f5021de058b605a1783fa1283e99812e645638"
   dependencies:
     joi "^6.10.1"
     jws "^3.1.4"
