@@ -6,16 +6,14 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "lint": "tslint 'app/**/*.ts' --type-check --project tsconfig.json",
-    "doc": "apidoc -f app/routes.ts -o doc"
+    "doc": "apidoc -f app/routes.ts -o docs"
   },
   "author": "",
   "license": "",
   "description": "",
   "private": true,
   "dependencies": {
-    "innots": "^1.1.1",
-    "config": "^1.25.1",
-    "jsonwebtoken": "^7.3.0"
+    "innots": "^1.1.2"
   },
   "devDependencies": {
     "apidoc": "^0.17.5",

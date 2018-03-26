@@ -1,7 +1,7 @@
 {
-    "name": "koa_basic_server",
-    "version": "0.0.1",
-    "description": "koa basic server example",
-    "title": "koa basic server",
+    "name": "inno_basic_server",
+    "version": "1.0.0",
+    "description": "inno basic server example",
+    "title": "inno basic server",
     "url" : ""
 }

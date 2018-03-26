@@ -597,9 +597,9 @@ inherits@2, inherits@2.0.3, inherits@~2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
-innots@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/innots/-/innots-1.1.1.tgz#6a1186b0a7baea892d070892e30efa15b52e1dcd"
+innots@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/innots/-/innots-1.1.2.tgz#d71f79442eacb482792cfcabc2c0d67038a75f42"
   dependencies:
     "@koa/cors" "^2.2.1"
     "@types/chai" "^3.4.34"
@@ -618,6 +618,7 @@ innots@^1.1.1:
     "@types/request-promise" "^4.1.35"
     "@types/validator" "^5.7.35"
     camelcase-object "^1.0.0"
+    config "^1.25.1"
     joi "^10.6.0"
     koa "^2.0.0"
     koa-body "^2.3.0"
@@ -701,16 +702,6 @@ jsonfile@^3.0.0:
 jsonwebtoken@7.4.1:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.1.tgz#7ca324f5215f8be039cd35a6c45bb8cb74a448fb"
-  dependencies:
-    joi "^6.10.1"
-    jws "^3.1.4"
-    lodash.once "^4.0.0"
-    ms "^2.0.0"
-    xtend "^4.0.1"
-
-jsonwebtoken@^7.3.0:
-  version "7.4.3"
-  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.4.3.tgz#77f5021de058b605a1783fa1283e99812e645638"
   dependencies:
     joi "^6.10.1"
     jws "^3.1.4"

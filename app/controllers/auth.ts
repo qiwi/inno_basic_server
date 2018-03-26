@@ -1,14 +1,12 @@
 import { Controller, InnoError } from "innots";
+import { JwtService } from "innots/build/lib/services/jwt";
 import { Context } from "koa";
-import * as jsonWebToken from 'jsonwebtoken';
-import * as config from 'config';
 import { UsersModel } from "../models/users";
 
 const usersModel = new UsersModel();
-const jwtSecret = config.get<string>('appConfig.jwt.secret');
 
 export class AuthController extends Controller {
-    login = async (ctx: Context, next: () => void): Promise<void> => {
+    public login = async (ctx: Context, next: () => void): Promise<void> => {
         const data = this.validate(ctx, (validator) => {
             return {
                 email: validator.isString('email'),
@@ -22,7 +20,7 @@ export class AuthController extends Controller {
             throw new InnoError('LOGIN_FAILED', 400, {});
         }
 
-        ctx.body = jsonWebToken.sign(data.email, jwtSecret);
+        ctx.body = JwtService.getToken(data.email);
         next();
     }
 }

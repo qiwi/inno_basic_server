@@ -13,8 +13,8 @@ export interface IUserCreateResult {
 
 export class UsersModel {
     public async addItem(email: string, name: string, password: string): Promise<IUserCreateResult> {
-        return await pgService.getRow(`
-        INSERT INTO koa.obj_user (user_email, user_name, user_password) 
+        return await pgService.getRow(
+            `INSERT INTO koa.obj_user (user_email, user_name, user_password)
             VALUES ($1, $2, $3) RETURNING id_user`,
             [email, name, password]);
     }
@@ -31,8 +31,8 @@ export class UsersModel {
     }
 
     public async getItemByEmail(email: string): Promise<IUser> {
-        return await pgService.getRow(`
-        SELECT id_user, user_email, user_name FROM koa.obj_user 
+        return await pgService.getRow(
+            `SELECT id_user, user_email, user_name FROM koa.obj_user
             WHERE user_email = $1`,
             [email]);
     }
@@ -48,8 +48,8 @@ export class UsersModel {
     }
 
     public async authUser(email: string, password: string): Promise<boolean> {
-        return !!await pgService.getRow(`
-        SELECT true FROM koa.obj_user 
+        return !!await pgService.getRow(
+            `SELECT true FROM koa.obj_user
             WHERE user_email = $1 and user_password = $2`,
             [email, password]);
     }
