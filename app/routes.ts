@@ -7,7 +7,7 @@ const router = new Router();
 const users = new UsersController();
 const auth = new AuthController();
 
-const usersPublicRoute = config.get('appConfig.apiPrefix') + 'users/';
+const usersPublicRoute = config.get('appConfig.publicApiPrefix') + 'users/';
 const usersProtectedRoute = config.get('appConfig.apiPrefix') + 'users/';
 const authRoute = config.get('appConfig.publicApiPrefix') + 'auth/';
 
@@ -34,7 +34,7 @@ router
  */
     .post(authRoute + 'login', auth.login)
     /**
-     * @api {post} /public/users/add
+     * @api {post} /public/auth/register
      * @apiName createUser
      * @apiGroup User
      *
@@ -46,7 +46,7 @@ router
      *
      * @apiSuccess {Object} result Созданный пользователь.
      */
-    .post(usersPublicRoute + 'add', users.addItem)
+    .post(authRoute + 'register', auth.register)
     /**
      * @api {get} /public/users/items
      * @apiName getUsers

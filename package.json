@@ -13,6 +13,8 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "@types/bcrypt": "^1.0.0",
+    "bcrypt": "^2.0.0",
     "config": "^1.30.0",
     "innots": "^1.1.5"
   },

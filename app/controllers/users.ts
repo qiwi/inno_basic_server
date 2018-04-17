@@ -1,25 +1,10 @@
-import { Controller, InnoError, ItemValidator, Validator } from 'innots';
+import { Controller, ItemValidator } from 'innots';
 import { Context } from 'koa';
 import { UsersModel } from '../models/users';
 
 const usersModel = new UsersModel();
 
 export class Users extends Controller {
-    public addItem = async (ctx: Context): Promise<void> => {
-        const data = this.validate(ctx, (validator: ItemValidator) => {
-            return {
-                email: validator.isEmail('email'),
-                name: validator.escape('name'),
-                password: validator.isString('password')
-            };
-        });
-
-        const oldUser = await usersModel.getItemByEmail(data.email);
-        if (oldUser) {
-            throw new InnoError('USER_EXISTS');
-        }
-        ctx.body = await usersModel.addItem(data.email, data.name, data.password);
-    }
 
     public getItems = async (ctx: Context): Promise<void> => {
         ctx.body = await usersModel.getItems();

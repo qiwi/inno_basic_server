@@ -1,13 +1,13 @@
-import { Controller, IAppJwtConfig, InnoError } from "innots";
-import { JwtService } from "innots/build/lib/koa/services/jwt_service";
 import * as config from "config";
+import { Controller, IAppJwtConfig, InnoError, ItemValidator } from "innots";
+import { JwtService } from "innots/build/lib/koa/services/jwt_service";
 import { Context } from "koa";
-import { UsersModel } from "../models/users";
+import { AuthService } from "../services/auth";
 
-const usersModel = new UsersModel();
+const authService: AuthService = new AuthService();
 
 export class AuthController extends Controller {
-    protected jwtService = new JwtService(config.get('appConfig.jwt') as IAppJwtConfig);
+    protected jwtService: JwtService = new JwtService(config.get('appConfig.jwt') as IAppJwtConfig);
 
     public login = async (ctx: Context, next: () => void): Promise<void> => {
         const data = this.validate(ctx, (validator) => {
@@ -17,9 +17,7 @@ export class AuthController extends Controller {
             };
         });
 
-        const authResult = await usersModel.authUser(data.email, data.password);
-
-        if (!authResult) {
+        if (!(await authService.authUser(data.email, data.password))) {
             throw new InnoError('LOGIN_FAILED', 400, {});
         }
 
@@ -27,4 +25,17 @@ export class AuthController extends Controller {
 
         next();
     }
+
+    public register = async (ctx: Context): Promise<void> => {
+        const data = this.validate(ctx, (validator: ItemValidator) => {
+            return {
+                email: validator.isEmail('email'),
+                name: validator.escape('name'),
+                password: validator.isString('password')
+            };
+        });
+
+        ctx.body = await authService.addUser(data.email, data.name, data.password);
+    }
+
 }
