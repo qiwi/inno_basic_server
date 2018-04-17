@@ -52,7 +52,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/public/users/add",
+    "url": "/public/auth/register",
     "title": "",
     "name": "createUser",
     "group": "User",
